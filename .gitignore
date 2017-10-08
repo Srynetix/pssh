@@ -1,3 +1,9 @@
-/config.py
 /.vscode
+
 *.pyc
+__pycache__
+*.egg-info
+/.cache
+
+# Config.yml
+/config.yml
