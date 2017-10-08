@@ -39,6 +39,11 @@ def entry_point():
         parser.print_help()
         sys.exit(1)
 
+    args = parser.parse_args()
+    if args.command is None:
+        parser.print_help()
+        sys.exit(1)
+
     call_handle_fn(parser.parse_args())
 
 
