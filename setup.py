@@ -8,7 +8,7 @@ setup(
     version=__version__,
     description='simple SSH connection utility',
     url='',
-    author='SharingCloud',
+    author='Denis BOURGE',
     author_email='',
     license='MIT',
     packages=['pssh'],
