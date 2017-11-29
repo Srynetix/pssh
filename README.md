@@ -12,26 +12,28 @@ pssh - simple SSH connection utility
 #### Configuration file content (config.yml)
 ```yaml
 defaults:
-  values:
+  _values:
     user: test
     port: 22
     identity: ~/.ssh/id_rsa
   work:
-    values:
+    _values:
       user: workuser
       port: 2233
       identity: ~/.ssh/work_id_rsa
 
 machines:
   localhost:
-    values:
+    _values:
       ip: localhost
   work:
     test01:
-      ip: test01.work.dev
+      _values:
+        ip: test01.work.dev
     test02:
-      ip: test02.work.dev
-      port: 2244
+      _values:
+        ip: test02.work.dev
+        port: 2244
 ```
 
 #### Machine configurations output
@@ -58,7 +60,7 @@ machines:
 
 ## Usage
 
-By default, `pssh` try to load the `config.yml` file at the current folder. You can specify another configuration file using the `-f` or `--file` argument before your command.
+By default, `pssh` try to load the `config.yml` file in your `~/.pssh` folder. You can specify another configuration file using the `-f` or `--file` argument before your command.
 
 - List available machines.
     - ```pssh list```
