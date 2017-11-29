@@ -30,20 +30,20 @@ def test_not_empty_defaults():
     str_content = """
 machines:
 defaults:
-    values:
+    _values:
         user: pouet
     one:
         two:
-            values:
+            _values:
                 user: pouet
                 port: 5555
             five:
-                values:
+                _values:
                     port: 5566
-        values:
+        _values:
             port: 4455
     three:
-        values:
+        _values:
     four:
 """
 
@@ -63,10 +63,10 @@ def test_defaults_error():
     str_content = """
 machines:
 defaults:
-    values:
+    _values:
         user: pouet
     one:pouet:
-        values:
+        _values:
             user: hello
 """
 
