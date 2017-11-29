@@ -11,6 +11,15 @@ if six.PY2:
     from io import open
 
 
+def get_user_configuration_path():
+    """
+    Get the config path for the current user.
+
+    :rtype: Path to the config file (str)
+    """
+    return os.path.normpath(os.path.expanduser("~/.pssh/config.yml"))
+
+
 def load_configuration_file(path_to_file):
     """
     Load a pssh configuration file.
@@ -135,12 +144,12 @@ def _extract_definition_keys(parent_key, current_dict):
 
     if len(keys) > 0:
         # Values
-        if "values" in keys:
-            values = current_dict["values"]
+        if "_values" in keys:
+            values = current_dict["_values"]
             extract.append((parent_key, values))
 
         # Child keys
-        for key in [k for k in keys if k != "values"]:
+        for key in [k for k in keys if k != "_values"]:
             if ":" in key:
                 raise BadKeyNameError("Character ':' not allowed.")
 

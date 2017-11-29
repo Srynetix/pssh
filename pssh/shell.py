@@ -12,7 +12,7 @@ def entry_point():
     """Entry point."""
     parser = argparse.ArgumentParser(description="pssh v.{0}".format(__version__))
     parser.add_argument('-v', '--version', action='version', version='%(prog)s ' + __version__)
-    parser.add_argument("-f", "--file", nargs="?", help="configuration file", default="config.yml")
+    parser.add_argument("-f", "--file", nargs="?", help="configuration file", default=None)
 
     subps = parser.add_subparsers(dest="command", metavar="")
     subps.add_parser("list", help="list machines")
@@ -31,6 +31,9 @@ def entry_point():
     pull.add_argument("machine", help="machine to connect to")
     pull.add_argument("source", help="source")
     pull.add_argument("dest", help="dest")
+
+    ping = subps.add_parser("ping", help="ping machine")
+    ping.add_argument("machine", help="machine to connect to")
 
     show = subps.add_parser("show", help="show a machine conf")
     show.add_argument("machine", help="machine name")
@@ -74,6 +77,13 @@ def _handle_connect(args):
 
     if args.tmux:
         command += " -t 'tmux attach || tmux new'"
+    os.system(command)
+
+
+def _handle_ping(args):
+    machine_conf = get_machine_configuration(args.file, args.machine)
+
+    command = "ping {ip}".format(ip=machine_conf["ip"])
     os.system(command)
 
 
